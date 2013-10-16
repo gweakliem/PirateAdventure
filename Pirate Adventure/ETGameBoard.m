@@ -46,6 +46,6 @@
 }
 
 -(ETTile*) tileAt: (CGPoint) coordinates {
-    
+    return [[gameTiles objectAtIndex:coordinates.x] objectAtIndex:coordinates.y];
 }
 @end

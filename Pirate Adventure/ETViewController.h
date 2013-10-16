@@ -30,17 +30,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *moveWestButton;
 - (IBAction)onTakeActionButton:(UIButton *)sender;
 
-// game play
-@property (strong, nonatomic) NSArray *gameBoard;
-@property (strong, nonatomic) ETCharacter *character;
-@property CGPoint currentPosition;
-
 - (IBAction)onNewGame:(UIButton *)sender;
 - (IBAction)onGoNorth:(UIButton *)sender;
 - (IBAction)onGoEast:(UIButton *)sender;
 - (IBAction)onGoSouth:(UIButton*)sender;
 - (IBAction)onGoWest:(UIButton *)sender;
 
-extern const int MAX_X;
-extern const int MAX_Y;
 @end
