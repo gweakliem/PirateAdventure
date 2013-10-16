@@ -18,5 +18,5 @@
 @property (strong, nonatomic) ETArmor *armor;
 @property (strong, nonatomic) ETWeapon *weapon;
 @property int healthChange;
--(void) takeActionOn: (ETCharacter *)character;
+-(Boolean) takeActionOn: (ETCharacter *)character;
 @end

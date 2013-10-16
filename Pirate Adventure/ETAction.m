@@ -9,7 +9,8 @@
 #import "ETAction.h"
 
 @implementation ETAction
--(void) takeActionOn: (ETCharacter *)character {
+-(Boolean) takeActionOn: (ETCharacter *)character {
     // default - do nothing
+    return false;
 }
 @end

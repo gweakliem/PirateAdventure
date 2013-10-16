@@ -11,5 +11,5 @@
 @interface ETFightAction : ETAction
 @property (strong, nonatomic) ETCharacter *opposingCharacter;
 -(ETFightAction*) initWithCharacter: (ETCharacter*) character andAction: (NSString*) action;
--(void) takeActionOn: (ETCharacter *)character;
+-(Boolean) takeActionOn: (ETCharacter *)character;
 @end

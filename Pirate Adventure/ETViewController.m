@@ -35,12 +35,13 @@ const int MAX_Y = 4;
 - (IBAction)onNewGame:(UIButton *)sender {
     ETGameFactory *gameFactory = [[ETGameFactory alloc]init];
     self.gameBoard = [gameFactory createGameBoard];
-    self.character = [[ETCharacter alloc] init];
+    self.character = [[ETCharacter alloc] initWithHealth:50 andDamage:5];
     self.currentPosition = CGPointMake(0,0);
 
-    [self updateUIToMatchTile];
+    [self updateUIToMatchGameState];
 }
 
+// Set the navigation buttons based on the coordinates
 // could be refactored into a gameboard class, with canMoveNorth, canMoveSouth, etc properties calculated on current
 // position and size of board.
 -(void) updateLegalMoves {
@@ -48,46 +49,66 @@ const int MAX_Y = 4;
     self.moveEastButton.enabled = self.currentPosition.x < MAX_X - 1;
     self.moveSouthButton.enabled = self.currentPosition.y > 0;
     self.moveWestButton.enabled = self.currentPosition.x > 0;
+
 }
 
--(void) updateUIToMatchTile {
-    [self updateLegalMoves];
-    ETTile *currentTile = [[self.gameBoard objectAtIndex:self.currentPosition.x] objectAtIndex:self.currentPosition.y];
-    self.storyDisplay.text = currentTile.story;
-    if (currentTile.action == nil) {
-        self.actionButton.titleLabel.text = @"...";
+// set up the user interface to what's appropriate for the current state of the game.
+-(void) updateUIToMatchGameState {
+    // if the character's dead, disable the UI except for "new game"
+    if (self.character.health <= 0) {
+        self.storyDisplay.text = @"You died, game over!";
         self.actionButton.enabled = false;
+        self.moveEastButton.enabled = self.moveNorthButton.enabled = self.moveSouthButton.enabled = self.moveWestButton.enabled = false;
+        self.healthStatusLabel.text = @"Dead!";
     } else {
-        self.actionButton.titleLabel.text = currentTile.action.text;
-        self.actionButton.enabled = true;
+        ETTile *currentTile = [[self.gameBoard objectAtIndex:self.currentPosition.x] objectAtIndex:self.currentPosition.y];
+        [self updateLegalMoves];
+        self.storyDisplay.text = currentTile.story;
+        if (currentTile.action == nil) {
+            [self.actionButton setTitle:@"..." forState:UIControlStateNormal];
+            self.actionButton.enabled = false;
+        } else {
+            [self.actionButton setTitle:currentTile.action.text forState:UIControlStateNormal];
+            self.actionButton.enabled = true;
+        }
+        self.currentSceneImage.image = currentTile.background;
+    
+        // set up status area
+        self.weaponStatusLabel.text = self.character.weapon.name;
+        self.healthStatusLabel.text = [NSString stringWithFormat:@"%d", [self.character getHealth]];
+        self.armorStatusLabel.text = self.character.armor.name;
+        self.damageStatusLabel.text = [NSString stringWithFormat:@"%d", [self.character getDamage]];
     }
-    self.currentSceneImage.image = currentTile.background;
 }
 
 - (IBAction)onGoNorth:(UIButton *)sender {
     self.currentPosition = CGPointMake(self.currentPosition.x, self.currentPosition.y+1);
-    [self updateUIToMatchTile];
+    [self updateUIToMatchGameState];
 }
 
 - (IBAction)onGoEast:(UIButton *)sender {
     self.currentPosition = CGPointMake(self.currentPosition.x + 1, self.currentPosition.y);
-    [self updateUIToMatchTile];
+    [self updateUIToMatchGameState];
 }
 
 - (IBAction)onGoSouth:(UIButton *)sender {
     self.currentPosition = CGPointMake(self.currentPosition.x, self.currentPosition.y-1);
-    [self updateUIToMatchTile];
+    [self updateUIToMatchGameState];
 }
 
 - (IBAction)onGoWest:(UIButton *)sender {
     self.currentPosition = CGPointMake(self.currentPosition.x-1, self.currentPosition.y);
-    [self updateUIToMatchTile];
+    [self updateUIToMatchGameState];
 }
 
 - (IBAction)onTakeActionButton:(UIButton *)sender {
     ETTile *currentTile = [[self.gameBoard objectAtIndex:self.currentPosition.x] objectAtIndex:self.currentPosition.y];
     if (currentTile.action != nil) {
-        [currentTile.action takeActionOn:self.character];
+        if ([currentTile.action takeActionOn:self.character]) {
+            // action complete, so clear the action for this tile.
+            currentTile.action = nil;
+        }
     }
+    [self updateUIToMatchGameState];
 }
 @end

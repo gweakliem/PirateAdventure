@@ -16,4 +16,8 @@
 @property int damage;
 @property (strong, nonatomic) ETWeapon *weapon;
 @property (strong, nonatomic) ETArmor *armor;
+
+-(int) getHealth;
+-(int) getDamage;
+
 @end

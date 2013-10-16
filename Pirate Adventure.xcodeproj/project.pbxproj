@@ -41,6 +41,7 @@
 		4C7525BF180CD0B9000AE668 /* ETAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7525BE180CD0B9000AE668 /* ETAction.m */; };
 		4C7525C2180CD33D000AE668 /* ETGiftAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7525C1180CD33D000AE668 /* ETGiftAction.m */; };
 		4C7525C5180CD53A000AE668 /* ETFightAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7525C4180CD53A000AE668 /* ETFightAction.m */; };
+		4C7525C8180E42AE000AE668 /* ETGameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7525C7180E42AE000AE668 /* ETGameBoard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,8 @@
 		4C7525C1180CD33D000AE668 /* ETGiftAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ETGiftAction.m; path = ../ETGiftAction.m; sourceTree = "<group>"; };
 		4C7525C3180CD53A000AE668 /* ETFightAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETFightAction.h; sourceTree = "<group>"; };
 		4C7525C4180CD53A000AE668 /* ETFightAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETFightAction.m; sourceTree = "<group>"; };
+		4C7525C6180E42AE000AE668 /* ETGameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETGameBoard.h; sourceTree = "<group>"; };
+		4C7525C7180E42AE000AE668 /* ETGameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETGameBoard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +186,8 @@
 				4C7525B5180B3AC5000AE668 /* ETArmor.m */,
 				4C752576180917BF000AE668 /* Images.xcassets */,
 				4C752565180917BF000AE668 /* Supporting Files */,
+				4C7525C6180E42AE000AE668 /* ETGameBoard.h */,
+				4C7525C7180E42AE000AE668 /* ETGameBoard.m */,
 			);
 			path = "Pirate Adventure";
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				4C7525BF180CD0B9000AE668 /* ETAction.m in Sources */,
 				4C7525B6180B3AC5000AE668 /* ETArmor.m in Sources */,
 				4C7525B3180B3AAF000AE668 /* ETWeapon.m in Sources */,
+				4C7525C8180E42AE000AE668 /* ETGameBoard.m in Sources */,
 				4C7525AD180B3960000AE668 /* ETTile.m in Sources */,
 				4C7525B9180B4189000AE668 /* ETGameFactory.m in Sources */,
 				4C75256F180917BF000AE668 /* ETAppDelegate.m in Sources */,

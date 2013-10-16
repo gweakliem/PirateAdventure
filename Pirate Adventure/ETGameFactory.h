@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ETGameBoard.h"
 
 @interface ETGameFactory : NSObject
 -(NSArray *) createGameBoard;
-
 @end

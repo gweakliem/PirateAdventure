@@ -10,24 +10,35 @@
 
 @implementation ETGiftAction
 -(ETGiftAction *) initWithArmor: (ETArmor*) armor andAction:(NSString *)action {
+    self.canAvoid = true;
     self.armor = armor;
     self.text = action;
     return self;
 }
 -(ETGiftAction *) initWithWeapon: (ETWeapon*) weapon andAction:(NSString *)action{
+    self.canAvoid = true;
     self.weapon = weapon;
     self.text = action;
     return self;
 }
+
+// don't quite like this one. canAvoid should be a parameter but I'm lazy and the places I'm using this
+// are all ok being unavoidable
 -(ETGiftAction *) initWithHealthChange: (int) healthChange andAction:(NSString *)action {
+    self.canAvoid = false;
     self.healthChange = healthChange;
     self.text = action;
     return self;
 }
 
--(void) takeActionOn: (ETCharacter *)character {
+-(Boolean) takeActionOn: (ETCharacter *)character {
     character.health += self.healthChange;
-    character.weapon = self.weapon;
-    character.armor = self.armor;
+    if (self.weapon != nil) {
+        character.weapon = self.weapon;
+    }
+    if (self.armor != nil) {
+        character.armor = self.armor;
+    }
+    return true;
 }
 @end
